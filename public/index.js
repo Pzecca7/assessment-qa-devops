@@ -118,7 +118,7 @@ const putBotBack = (id) => {
 };
 
 const drawFive = () => {
-  axios.get("/api/robots/shuffled").then((res) => {
+  axios.get("http://54.80.14.68:8000/api/robots/shuffled").then((res) => {
     const shuffledBots = res.data;
     choices = shuffledBots.slice(0, 5);
     compDuo = shuffledBots.slice(6, 8);
@@ -139,7 +139,7 @@ const duel = () => {
     .querySelectorAll(".bot-btn")
     .forEach((btn) => btn.classList.add("hide"));
   setTimeout(() => {
-    axios.post("/api/duel", { compDuo, playerDuo }).then(({ data }) => {
+    axios.post("http://54.80.14.68:8000/api/duel", { compDuo, playerDuo }).then(({ data }) => {
       resultsText.textContent = data;
       playAgainBtn.classList.remove("hide");
       getPlayerStats();
@@ -161,14 +161,14 @@ const reset = () => {
 };
 
 const getPlayerStats = () => {
-  axios.get("/api/player").then(({ data: { wins, losses } }) => {
+  axios.get("http://54.80.14.68:8000/api/player").then(({ data: { wins, losses } }) => {
     winsText.textContent = `Wins: ${wins}`;
     lossesTest.textContent = `Losses: ${losses}`;
   });
 };
 
 const getAllBots = () => {
-  axios.get("/api/robots").then(({ data }) => {
+  axios.get("http://54.80.14.68:8000/api/robots").then(({ data }) => {
     allBotsDiv.innerHTML = "";
 
     data.forEach((bot) => {
